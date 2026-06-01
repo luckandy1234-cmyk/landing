@@ -9,7 +9,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="py-28 px-6 md:px-16 bg-white">
       <div className="max-w-4xl mx-auto">
         <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">어떻게 하면 되나요</p>
-        <h2 className="text-4xl font-bold text-gray-900 mb-16">딱 세 단계예요</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-16">딱 세 단계예요</h2>
 
         <div className="grid md:grid-cols-3 gap-8">
           {steps.map((s) => (

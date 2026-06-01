@@ -10,7 +10,7 @@ export default function Features() {
     <section className="py-28 px-6 md:px-16 bg-gray-50">
       <div className="max-w-4xl mx-auto">
         <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">리스크는 없을까요</p>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">걱정 마세요</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">걱정 마세요</h2>
         <p className="text-gray-400 mb-16">기존 앱의 우려되실 것들을 차단했습니다.</p>
 
         <div className="grid md:grid-cols-2 gap-5">
