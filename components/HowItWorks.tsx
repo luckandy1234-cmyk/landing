@@ -1,6 +1,6 @@
 export default function HowItWorks() {
   const steps = [
-    { number: "01", title: "신청", desc: "이름, 직장, 직군, 연락처 등 입력." },
+    { number: "01", title: "신청", desc: "이름, 직장, 직군, 연락 등 입력 후 노쇼 보증금 입금." },
     { number: "02", title: "매칭", desc: "같은 역세권 6인 이하 소그룹으로 묶어드립니다. 이동시간 0분." },
     { number: "03", title: "식사", desc: "화제 카드 5장이 준비돼 있어요. 만나면 보증금 즉시 환급." },
   ];
