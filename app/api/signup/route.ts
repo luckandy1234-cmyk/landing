@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const SHEET_WEBHOOK_URL = process.env.SHEET_WEBHOOK_URL!;
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -12,13 +14,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // TODO 2단계: Supabase DB 저장
-    // const { error } = await supabase.from("applicants").insert({ name, company, building, role, contact, memo });
-
-    // TODO 2단계: Resend 이메일 발송
-    // await resend.emails.send({ ... });
-
-    console.log("[신규 신청]", { name, company, building, role, contact, memo });
+    const data = encodeURIComponent(JSON.stringify({ name, company, building: building || "", role, contact, memo: memo || "" }));
+    await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`);
 
     return NextResponse.json({ success: true });
   } catch {
