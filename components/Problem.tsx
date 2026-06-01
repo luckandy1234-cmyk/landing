@@ -17,7 +17,7 @@ export default function Problem() {
   return (
     <section id="why" className="py-28 px-6 md:px-16 bg-gray-50">
       <div className="max-w-4xl mx-auto">
-        <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">왜 지금인가</p>
+        <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">무엇이 달라질까요</p>
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
           우연한 점심 한 끼가<br />
           만드는 것들
