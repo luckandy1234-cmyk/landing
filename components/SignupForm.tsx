@@ -69,11 +69,11 @@ export default function SignupForm() {
             좋은 점심<br />한 번 먹어볼까요?
           </h2>
           <p className="text-gray-400 text-sm leading-relaxed mb-8">
-            광화문·시청역 도보 10분 내 직장인 대상으로<br />첫 회차를 모집합니다. 첫 회차는 무료 체험이에요.
+            광화문 도보 10분 내 직장인 대상으로<br />첫 회차를 모집합니다. 첫 회차는 무료 체험이에요.
           </p>
           <div className="space-y-3 text-sm text-gray-400">
             {[
-              "광화문·시청역 도보 10분 이내",
+              "광화문 도보 10분 이내",
               "6인 이하 소그룹, 보증금은 만나면 즉시 환급",
               "화제 카드 5장, 어색함 없이 1시간",
             ].map((t) => (
