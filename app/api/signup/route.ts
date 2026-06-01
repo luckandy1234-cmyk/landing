@@ -38,7 +38,11 @@ export async function POST(req: NextRequest) {
       gender, birthYear, applyDate, menu,
       companion1, companion2, memo,
     }));
-    await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`);
+    const webhookRes = await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`, { redirect: "follow" });
+    const webhookData = await webhookRes.json();
+    if (webhookData.error) {
+      return NextResponse.json({ error: webhookData.error }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true });
   } catch {
