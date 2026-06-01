@@ -1,4 +1,4 @@
-export default function Footer() {
+﻿export default function Footer() {
   return (
     <footer className="border-t border-gray-100 py-10 px-6 md:px-16">
       <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
@@ -9,3 +9,4 @@ export default function Footer() {
     </footer>
   );
 }
+

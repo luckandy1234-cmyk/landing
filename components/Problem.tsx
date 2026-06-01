@@ -17,7 +17,7 @@ export default function Problem() {
   return (
     <section id="why" className="py-28 px-6 md:px-16 bg-gray-50">
       <div className="max-w-4xl mx-auto">
-        <p className="text-green-600 text-xs font-semibold uppercase tracking-widest mb-5">왜 지금인가</p>
+        <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">왜 지금인가</p>
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
           우연한 점심 한 끼가<br />
           만드는 것들
@@ -36,7 +36,7 @@ export default function Problem() {
                 <p className="text-gray-300 text-sm">{m.solo}</p>
               </div>
               {/* 함께 */}
-              <div className="bg-green-50 px-8 py-7 flex items-start gap-4">
+              <div className="bg-orange-50 px-8 py-7 flex items-start gap-4">
                 <span className="text-2xl mt-0.5">✨</span>
                 <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{m.together}</p>
               </div>

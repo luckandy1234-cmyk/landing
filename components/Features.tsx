@@ -9,7 +9,7 @@ export default function Features() {
   return (
     <section className="py-28 px-6 md:px-16 bg-gray-50">
       <div className="max-w-4xl mx-auto">
-        <p className="text-green-600 text-xs font-semibold uppercase tracking-widest mb-5">차별점</p>
+        <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">차별점</p>
         <h2 className="text-4xl font-bold text-gray-900 mb-4">밀팅이 다른 이유</h2>
         <p className="text-gray-400 mb-16">기존 앱이 죽은 세 가지 이유를 구조로 해결했습니다.</p>
 

@@ -12,21 +12,32 @@ function sanitize(value: unknown): string {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const name     = sanitize(body.name);
-    const company  = sanitize(body.company);
-    const building = sanitize(body.building);
-    const role     = sanitize(body.role);
-    const contact  = sanitize(body.contact);
-    const memo     = sanitize(body.memo);
 
-    if (!name || !company || !role || !contact) {
+    const name       = sanitize(body.name);
+    const company    = sanitize(body.company);
+    const building   = sanitize(body.building);
+    const role       = sanitize(body.role);
+    const contact    = sanitize(body.contact);
+    const gender     = sanitize(body.gender);
+    const birthYear  = sanitize(body.birthYear);
+    const applyDate  = sanitize(body.applyDate);
+    const menu       = sanitize(body.menu);
+    const companion1 = sanitize(body.companion1);
+    const companion2 = sanitize(body.companion2);
+    const memo       = sanitize(body.memo);
+
+    if (!name || !company || !role || !contact || !gender || !birthYear || !applyDate) {
       return NextResponse.json(
         { error: "필수 항목을 모두 입력해주세요." },
         { status: 400 }
       );
     }
 
-    const data = encodeURIComponent(JSON.stringify({ name, company, building, role, contact, memo }));
+    const data = encodeURIComponent(JSON.stringify({
+      name, company, building, role, contact,
+      gender, birthYear, applyDate, menu,
+      companion1, companion2, memo,
+    }));
     await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`);
 
     return NextResponse.json({ success: true });

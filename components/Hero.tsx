@@ -3,14 +3,14 @@
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 pb-24 bg-white">
-      <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-xs font-medium px-4 py-1.5 rounded-full mb-10 border border-green-100">
-        <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+      <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-xs font-medium px-4 py-1.5 rounded-full mb-10 border border-orange-100">
+        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
         광화문 파일럿 · 첫 회차 무료
       </div>
 
       <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight mb-6 max-w-3xl">
         오늘 점심,<br />
-        <span className="text-green-600">한 번쯤</span> 달라질 수 있어요
+        <span className="text-orange-600">한 번쯤</span> 달라질 수 있어요
       </h1>
 
       <p className="text-gray-400 text-lg md:text-xl max-w-lg leading-relaxed mb-12">
@@ -22,7 +22,7 @@ export default function Hero() {
         <a
           href="#signup"
           onClick={(e) => { e.preventDefault(); document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" }); }}
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3.5 rounded-full text-sm transition-colors"
+          className="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-8 py-3.5 rounded-full text-sm transition-colors"
         >
           무료로 신청하기 →
         </a>
@@ -37,9 +37,9 @@ export default function Hero() {
 
       {/* 하단 소형 뱃지 */}
       <div className="mt-20 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
-        <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> 소규모 그룹 매칭</span>
-        <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> 화제 카드 제공</span>
-        <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> 노쇼 방지 보증금</span>
+        <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> 소규모 그룹 매칭</span>
+        <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> 화제 카드 제공</span>
+        <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> 노쇼 방지 보증금</span>
       </div>
     </section>
   );
