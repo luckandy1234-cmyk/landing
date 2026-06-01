@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "밀팅 — 한 끼에 만남의 가치를 더하다",
-  description: "같은 동네 처음 보는 직장인과 어색하지 않은 점심 한 시간. 밀팅이 매칭해드립니다.",
+  description: "직장인 점심 매칭 서비스",
   openGraph: {
     title: "밀팅 Mealting",
     description: "광화문 직장인 점심 매칭 서비스",
