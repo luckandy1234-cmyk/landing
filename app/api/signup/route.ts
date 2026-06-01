@@ -39,7 +39,13 @@ export async function POST(req: NextRequest) {
       companion1, companion2, memo,
     }));
     const webhookRes = await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`, { redirect: "follow" });
-    const webhookData = await webhookRes.json();
+    const webhookText = await webhookRes.text();
+    let webhookData: { success?: boolean; error?: string };
+    try {
+      webhookData = JSON.parse(webhookText);
+    } catch {
+      return NextResponse.json({ error: "webhook 응답 오류: " + webhookText.slice(0, 200) }, { status: 500 });
+    }
     if (webhookData.error) {
       return NextResponse.json({ error: webhookData.error }, { status: 500 });
     }
