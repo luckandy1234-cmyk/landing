@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 pb-24 bg-white">
       <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-xs font-medium px-4 py-1.5 rounded-full mb-10 border border-orange-100">
         <span className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
-        광화문 파일럿 · 첫 회차 무료
+        광화문 파일럿
       </div>
 
       <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight mb-6 max-w-3xl">
