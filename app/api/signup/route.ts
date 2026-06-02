@@ -21,9 +21,7 @@ export async function POST(req: NextRequest) {
     const gender     = sanitize(body.gender);
     const birthYear  = sanitize(body.birthYear);
     const applyDate  = sanitize(body.applyDate);
-    const menu       = sanitize(body.menu);
     const companion1 = sanitize(body.companion1);
-    const companion2 = sanitize(body.companion2);
     const memo       = sanitize(body.memo);
 
     if (!name || !company || !role || !contact || !gender || !birthYear || !applyDate) {
@@ -35,8 +33,8 @@ export async function POST(req: NextRequest) {
 
     const data = encodeURIComponent(JSON.stringify({
       name, company, building, role, contact,
-      gender, birthYear, applyDate, menu,
-      companion1, companion2, memo,
+      gender, birthYear, applyDate,
+      companion1, memo,
     }));
     const webhookRes = await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`, { redirect: "follow" });
     const webhookText = await webhookRes.text();
