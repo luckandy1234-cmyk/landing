@@ -3,7 +3,7 @@
 export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 py-4 bg-white/90 backdrop-blur-sm border-b border-gray-100">
-      <span className="font-bold text-gray-900 text-lg tracking-tight">밀팅 <span className="font-bold tracking-wider">MEaLTing</span></span>
+      <span className="font-bold text-gray-900 text-lg tracking-tight">밀팅 <span className="font-bold tracking-wider">Mealting</span></span>
       <a
         href="#signup"
         onClick={(e) => { e.preventDefault(); document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" }); }}
