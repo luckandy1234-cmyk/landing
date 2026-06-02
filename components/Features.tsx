@@ -4,6 +4,7 @@ export default function Features() {
     { icon: "🔒", title: "노쇼 방지", desc: "소액 보증금으로 진짜 올 사람만 거릅니다. 만나면 즉시 환급." },
     { icon: "🃏", title: "화제 카드", desc: "첫 침묵이 가장 어렵습니다. 카드 5장이 그 3초를 해결해요." },
     { icon: "👥", title: "소규모 그룹", desc: "1:1은 부담스럽습니다. 6인 이하 소그룹으로 부담을 분산해요." },
+    { icon: "🏢", title: "내 회사 피하기", desc: "동반신청이 아니라면 같은 회사 사람과는 매칭되지 않아요." },
   ];
 
   return (
@@ -11,7 +12,7 @@ export default function Features() {
       <div className="max-w-4xl mx-auto">
         <p className="text-orange-600 text-xs font-semibold uppercase tracking-widest mb-5">리스크는 없을까요</p>
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">걱정 마세요</h2>
-        <p className="text-gray-400 mb-16">기존 앱의 우려되실 것들을 차단했습니다.</p>
+        <p className="text-gray-400 mb-16">우려되실 것들을 차단했습니다.</p>
 
         <div className="grid md:grid-cols-2 gap-5">
           {items.map((item) => (
