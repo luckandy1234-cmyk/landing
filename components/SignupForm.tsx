@@ -155,8 +155,8 @@ export default function SignupForm() {
 
               {/* 메모 */}
               <div>
-                <label className="block text-xs text-gray-400 font-medium mb-1.5">하고 싶은 말 (선택)</label>
-                <textarea name="memo" value={form.memo} onChange={handleChange} rows={3} placeholder="대화 나누고 싶은 주제 등을 편하게 적어주세요" className={`${inputClass} resize-none`} />
+                <label className="block text-xs text-gray-400 font-medium mb-1.5">대화 나누고 싶은 주제가 있나요? <span className="text-gray-300">(편하게 말씀 해주세요)</span></label>
+                <textarea name="memo" value={form.memo} onChange={handleChange} rows={3} placeholder="예시) 이직, 커리어, 재테크, 문화생활, 연애 등" className={`${inputClass} resize-none`} />
               </div>
 
               {status === "error" && (
