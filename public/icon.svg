@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" rx="20" fill="#EA580C"/>
+
+  <!-- Spoon (left) -->
+  <!-- Spoon head -->
+  <ellipse cx="22" cy="28" rx="9" ry="11" fill="white"/>
+  <!-- Spoon handle -->
+  <rect x="19.5" y="37" width="5" height="38" rx="2.5" fill="white"/>
+
+  <!-- Bowl (center) -->
+  <!-- Bowl body -->
+  <path d="M34 48 Q50 68 66 48" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Bowl rim -->
+  <line x1="32" y1="48" x2="68" y2="48" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <!-- Bowl base -->
+  <rect x="43" y="67" width="14" height="4" rx="2" fill="white"/>
+  <!-- Steam lines -->
+  <path d="M42 40 Q39 36 42 32 Q45 28 42 24" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M50 38 Q47 34 50 30 Q53 26 50 22" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M58 40 Q55 36 58 32 Q61 28 58 24" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Chopsticks (right) -->
+  <!-- Chopstick 1 -->
+  <rect x="71" y="18" width="5" height="58" rx="2.5" fill="white" transform="rotate(-8 73.5 47)"/>
+  <!-- Chopstick 2 -->
+  <rect x="80" y="18" width="5" height="58" rx="2.5" fill="white" transform="rotate(8 82.5 47)"/>
+</svg>

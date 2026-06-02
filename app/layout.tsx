@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full">
+      <head>
+        <link rel="icon" href="/icon.svg?v=2" type="image/svg+xml" />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
