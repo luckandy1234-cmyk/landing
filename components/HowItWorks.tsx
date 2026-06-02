@@ -1,8 +1,10 @@
+import React from "react";
+
 export default function HowItWorks() {
   const steps = [
-    { number: "01", title: "신청", desc: "이름, 직장, 직군, 연락처 등 입력 후 노쇼 보증금 입금." },
+    { number: "01", title: "신청", desc: <>이름, 직장, 직군, 연락처 등 입력 후 <span className="line-through text-gray-300">노쇼 보증금 입금</span> → 파일럿 회차 무료신청.</> },
     { number: "02", title: "매칭", desc: "같은 역세권 6인 이하 소그룹으로 묶어드립니다. 이동시간 0분." },
-    { number: "03", title: "식사", desc: "화제 카드 5장이 준비돼 있어요. 만나면 보증금 즉시 환급." },
+    { number: "03", title: "식사", desc: <>화제 카드 5장이 준비돼 있어요. <span className="line-through text-gray-300">만나면 보증금 즉시 환급.</span></> },
   ];
 
   return (
