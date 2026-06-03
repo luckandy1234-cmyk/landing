@@ -72,7 +72,7 @@ export default function SignupForm() {
             {[
               "광화문역 도보 10분 이내",
               "6인 이하 소그룹, 보증금은 만나면 즉시 환급",
-              "화제 카드 5장, 어색함 없이 1시간",
+              "대화 주제 제안, 어색함 없이 1시간",
             ].map((t) => (
               <div key={t} className="flex items-center gap-2.5">
                 <span className="text-orange-500 text-xs">✓</span> {t}

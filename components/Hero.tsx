@@ -38,7 +38,7 @@ export default function Hero() {
       {/* 하단 소형 뱃지 */}
       <div className="mt-20 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
         <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> 소규모 그룹 매칭</span>
-        <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> 화제 카드 제공</span>
+        <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> 내 회사 피하기</span>
         <span className="flex items-center gap-1.5"><span className="text-orange-500">✓</span> <span className="line-through">노쇼 방지 보증금</span> 파일럿 회차 무료신청</span>
       </div>
     </section>
