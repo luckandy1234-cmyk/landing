@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
     const data = encodeURIComponent(JSON.stringify({
       name, company, building, role, contact,
-      gender, birthYear, applyDates,
+      gender, birthYear, applyDate: applyDates,
       companion1, memo,
     }));
     const webhookRes = await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`, { redirect: "follow" });
