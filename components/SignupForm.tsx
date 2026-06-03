@@ -10,17 +10,51 @@ type FormData = {
   contact: string;
   gender: string;
   birthYear: string;
-  applyDate: string;
+  applyDates: string[];
   companion1: string;
   memo: string;
 };
 
 type Status = "idle" | "loading" | "success" | "error";
 
+const DAY_KO = ["일", "월", "화", "수", "목", "금", "토"];
+
+function toLocalDateString(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function getAvailableWeekdays(): { value: string; label: string }[] {
+  const result: { value: string; label: string }[] = [];
+  const today = new Date();
+  const dow = today.getDay(); // 0=일, 6=토
+  const daysUntilNextMonday = dow === 0 ? 1 : 8 - dow;
+  const start = new Date(today);
+  start.setDate(today.getDate() + daysUntilNextMonday);
+
+  for (let i = 0, added = 0; added < 15; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    const day = d.getDay();
+    if (day >= 1 && day <= 5) {
+      result.push({
+        value: toLocalDateString(d),
+        label: `${d.getMonth() + 1}/${d.getDate()} (${DAY_KO[day]})`,
+      });
+      added++;
+    }
+  }
+  return result;
+}
+
+const AVAILABLE_DATES = getAvailableWeekdays();
+
 export default function SignupForm() {
   const [form, setForm] = useState<FormData>({
     name: "", company: "", building: "", role: "", contact: "",
-    gender: "", birthYear: "", applyDate: "",
+    gender: "", birthYear: "", applyDates: [],
     companion1: "", memo: "",
   });
   const [status, setStatus] = useState<Status>("idle");
@@ -30,8 +64,23 @@ export default function SignupForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const toggleDate = (value: string) => {
+    setForm((prev) => {
+      if (prev.applyDates.includes(value)) {
+        return { ...prev, applyDates: prev.applyDates.filter((d) => d !== value) };
+      }
+      if (prev.applyDates.length >= 3) return prev;
+      return { ...prev, applyDates: [...prev.applyDates, value] };
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.applyDates.length === 0) {
+      setStatus("error");
+      setErrorMsg("희망 날짜를 1개 이상 선택해주세요.");
+      return;
+    }
     setStatus("loading");
     try {
       const res = await fetch("/api/signup", {
@@ -44,7 +93,7 @@ export default function SignupForm() {
         throw new Error(data.error || "신청 중 오류가 발생했습니다.");
       }
       setStatus("success");
-      setForm({ name: "", company: "", building: "", role: "", contact: "", gender: "", birthYear: "", applyDate: "", companion1: "", memo: "" });
+      setForm({ name: "", company: "", building: "", role: "", contact: "", gender: "", birthYear: "", applyDates: [], companion1: "", memo: "" });
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "오류가 발생했습니다.");
@@ -142,10 +191,37 @@ export default function SignupForm() {
                 <input type="text" name="contact" value={form.contact} onChange={handleChange} required placeholder="kakao_id 또는 010-0000-0000" className={inputClass} />
               </div>
 
-              {/* 신청일 */}
+              {/* 희망 날짜 */}
               <div>
-                <label className="block text-xs text-gray-400 font-medium mb-1.5">신청일 <span className="text-orange-500">*</span></label>
-                <input type="date" name="applyDate" value={form.applyDate} onChange={handleChange} required className={inputClass} />
+                <label className="block text-xs text-gray-400 font-medium mb-2">
+                  희망 날짜 <span className="text-orange-500">*</span>
+                  <span className="text-gray-300 ml-1.5">
+                    최대 3일 선택 ({form.applyDates.length}/3)
+                  </span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {AVAILABLE_DATES.map(({ value, label }) => {
+                    const selected = form.applyDates.includes(value);
+                    const disabled = !selected && form.applyDates.length >= 3;
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => toggleDate(value)}
+                        disabled={disabled}
+                        className={`px-3 py-2 rounded-lg text-xs font-medium border transition ${
+                          selected
+                            ? "bg-orange-600 border-orange-600 text-white"
+                            : disabled
+                            ? "border-gray-100 text-gray-300 cursor-not-allowed"
+                            : "border-gray-200 text-gray-500 hover:border-orange-300 hover:text-orange-500"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* 동반 신청 */}

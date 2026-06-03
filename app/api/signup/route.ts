@@ -20,11 +20,13 @@ export async function POST(req: NextRequest) {
     const contact    = sanitize(body.contact);
     const gender     = sanitize(body.gender);
     const birthYear  = sanitize(body.birthYear);
-    const applyDate  = sanitize(body.applyDate);
+    const applyDates = Array.isArray(body.applyDates)
+      ? body.applyDates.map(sanitize).filter(Boolean).slice(0, 3).join(", ")
+      : sanitize(body.applyDates);
     const companion1 = sanitize(body.companion1);
     const memo       = sanitize(body.memo);
 
-    if (!name || !company || !role || !contact || !gender || !birthYear || !applyDate) {
+    if (!name || !company || !role || !contact || !gender || !birthYear || !applyDates) {
       return NextResponse.json(
         { error: "필수 항목을 모두 입력해주세요." },
         { status: 400 }
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
 
     const data = encodeURIComponent(JSON.stringify({
       name, company, building, role, contact,
-      gender, birthYear, applyDate,
+      gender, birthYear, applyDates,
       companion1, memo,
     }));
     const webhookRes = await fetch(`${SHEET_WEBHOOK_URL}?data=${data}`, { redirect: "follow" });
