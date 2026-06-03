@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 pb-24 bg-white">
       <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-xs font-medium px-4 py-1.5 rounded-full mb-10 border border-orange-100">
-        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
+        <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
         광화문 파일럿
       </div>
 
