@@ -17,8 +17,6 @@ type FormData = {
 
 type Status = "idle" | "loading" | "success" | "error";
 
-const DAY_KO = ["일", "월", "화", "수", "목", "금", "토"];
-
 function toLocalDateString(d: Date): string {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -26,30 +24,127 @@ function toLocalDateString(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
-function getAvailableWeekdays(): { value: string; label: string }[] {
-  const result: { value: string; label: string }[] = [];
+function getStartDate(): string {
   const today = new Date();
-  const dow = today.getDay(); // 0=일, 6=토
-  const daysUntilNextMonday = dow === 0 ? 1 : 8 - dow;
+  const dow = today.getDay();
+  const daysUntil = dow === 0 ? 1 : 8 - dow;
   const start = new Date(today);
-  start.setDate(today.getDate() + daysUntilNextMonday);
-
-  for (let i = 0, added = 0; added < 15; i++) {
-    const d = new Date(start);
-    d.setDate(start.getDate() + i);
-    const day = d.getDay();
-    if (day >= 1 && day <= 5) {
-      result.push({
-        value: toLocalDateString(d),
-        label: `${d.getMonth() + 1}/${d.getDate()} (${DAY_KO[day]})`,
-      });
-      added++;
-    }
-  }
-  return result;
+  start.setDate(today.getDate() + daysUntil);
+  return toLocalDateString(start);
 }
 
-const AVAILABLE_DATES = getAvailableWeekdays();
+function Calendar({
+  selected,
+  onToggle,
+}: {
+  selected: string[];
+  onToggle: (value: string) => void;
+}) {
+  const startStr = getStartDate();
+  const startDate = new Date(startStr);
+
+  const [viewYear, setViewYear] = useState(startDate.getFullYear());
+  const [viewMonth, setViewMonth] = useState(startDate.getMonth());
+
+  const firstDayOfMonth = new Date(viewYear, viewMonth, 1);
+  const startDow = firstDayOfMonth.getDay();
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < startDow; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const canGoPrev = (() => {
+    const prevY = viewMonth === 0 ? viewYear - 1 : viewYear;
+    const prevM = viewMonth === 0 ? 11 : viewMonth - 1;
+    const lastOfPrev = toLocalDateString(new Date(prevY, prevM + 1, 0));
+    return lastOfPrev >= startStr;
+  })();
+
+  const prevMonth = () => {
+    if (viewMonth === 0) { setViewYear(y => y - 1); setViewMonth(11); }
+    else setViewMonth(m => m - 1);
+  };
+  const nextMonth = () => {
+    if (viewMonth === 11) { setViewYear(y => y + 1); setViewMonth(0); }
+    else setViewMonth(m => m + 1);
+  };
+
+  return (
+    <div className="border border-gray-200 rounded-xl p-4 select-none">
+      {/* 월 네비게이션 */}
+      <div className="flex items-center justify-between mb-3">
+        <button
+          type="button"
+          onClick={prevMonth}
+          disabled={!canGoPrev}
+          className="w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 disabled:opacity-20 disabled:cursor-not-allowed transition text-lg leading-none"
+        >
+          ‹
+        </button>
+        <span className="text-sm font-semibold text-gray-700">
+          {viewYear}년 {viewMonth + 1}월
+        </span>
+        <button
+          type="button"
+          onClick={nextMonth}
+          className="w-7 h-7 flex items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 transition text-lg leading-none"
+        >
+          ›
+        </button>
+      </div>
+
+      {/* 요일 헤더 */}
+      <div className="grid grid-cols-7 mb-1">
+        {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
+          <div
+            key={d}
+            className={`text-center text-xs font-medium py-1 ${
+              i === 0 ? "text-red-300" : i === 6 ? "text-blue-300" : "text-gray-400"
+            }`}
+          >
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* 날짜 그리드 */}
+      <div className="grid grid-cols-7 gap-y-1">
+        {cells.map((day, idx) => {
+          if (!day) return <div key={idx} />;
+
+          const date = new Date(viewYear, viewMonth, day);
+          const dow = date.getDay();
+          const dateStr = toLocalDateString(date);
+          const isWeekend = dow === 0 || dow === 6;
+          const isPast = dateStr < startStr;
+          const isDisabled = isWeekend || isPast;
+          const isSelected = selected.includes(dateStr);
+          const isMaxed = selected.length >= 3 && !isSelected;
+
+          return (
+            <div key={idx} className="flex items-center justify-center">
+              <button
+                type="button"
+                disabled={isDisabled || isMaxed}
+                onClick={() => onToggle(dateStr)}
+                className={`w-8 h-8 rounded-full text-xs font-medium transition flex items-center justify-center
+                  ${isSelected ? "bg-orange-600 text-white shadow-sm" : ""}
+                  ${!isSelected && !isDisabled && !isMaxed ? "text-gray-700 hover:bg-orange-50 hover:text-orange-600" : ""}
+                  ${isDisabled ? "text-gray-200 cursor-not-allowed" : ""}
+                  ${isMaxed && !isDisabled ? "text-gray-300 cursor-not-allowed" : ""}
+                `}
+              >
+                {day}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 export default function SignupForm() {
   const [form, setForm] = useState<FormData>({
@@ -101,7 +196,6 @@ export default function SignupForm() {
   };
 
   const roles = ["개발·IT", "디자인", "마케팅·브랜드", "영업·BD", "기획·PM", "경영·전략", "재무·회계", "HR", "법무", "기타"];
-
   const inputClass = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-200 transition";
 
   return (
@@ -195,33 +289,17 @@ export default function SignupForm() {
               <div>
                 <label className="block text-xs text-gray-400 font-medium mb-2">
                   희망 날짜 <span className="text-orange-500">*</span>
-                  <span className="text-gray-300 ml-1.5">
-                    최대 3일 선택 ({form.applyDates.length}/3)
-                  </span>
+                  <span className="text-gray-300 ml-1.5">주중만 선택 가능, 최대 3일 ({form.applyDates.length}/3)</span>
                 </label>
-                <div className="flex flex-wrap gap-2">
-                  {AVAILABLE_DATES.map(({ value, label }) => {
-                    const selected = form.applyDates.includes(value);
-                    const disabled = !selected && form.applyDates.length >= 3;
-                    return (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => toggleDate(value)}
-                        disabled={disabled}
-                        className={`px-3 py-2 rounded-lg text-xs font-medium border transition ${
-                          selected
-                            ? "bg-orange-600 border-orange-600 text-white"
-                            : disabled
-                            ? "border-gray-100 text-gray-300 cursor-not-allowed"
-                            : "border-gray-200 text-gray-500 hover:border-orange-300 hover:text-orange-500"
-                        }`}
-                      >
-                        {label}
-                      </button>
-                    );
-                  })}
-                </div>
+                <Calendar selected={form.applyDates} onToggle={toggleDate} />
+                {form.applyDates.length > 0 && (
+                  <p className="text-xs text-orange-500 mt-2">
+                    선택됨: {form.applyDates.map(d => {
+                      const [, m, day] = d.split("-");
+                      return `${parseInt(m)}/${parseInt(day)}`;
+                    }).join(", ")}
+                  </p>
+                )}
               </div>
 
               {/* 동반 신청 */}
