@@ -71,8 +71,9 @@ export default function SignupForm() {
           <div className="space-y-3 text-sm text-gray-400">
             {[
               "광화문역 도보 10분 이내",
-              "6인 이하 소그룹, 보증금은 만나면 즉시 환급",
+              "6인 이하 소그룹, 같은 회사 사람과는 매칭 X",
               "대화 주제 제안, 어색함 없이 1시간",
+              "매칭 완료 후 식사 단톡방 생성",
             ].map((t) => (
               <div key={t} className="flex items-center gap-2.5">
                 <span className="text-orange-500 text-xs">✓</span> {t}
