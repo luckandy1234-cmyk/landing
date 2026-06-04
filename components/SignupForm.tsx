@@ -263,7 +263,12 @@ export default function SignupForm() {
                 </div>
                 <div>
                   <label className="block text-xs text-gray-400 font-medium mb-1.5">연생 <span className="text-orange-500">*</span></label>
-                  <input type="text" name="birthYear" value={form.birthYear} onChange={handleChange} required placeholder="예) 1995" maxLength={4} className={inputClass} />
+                  <select name="birthYear" value={form.birthYear} onChange={handleChange} required className={inputClass}>
+                    <option value="">선택</option>
+                    {Array.from({ length: 31 }, (_, i) => 2010 - i).map((y) => (
+                      <option key={y} value={String(y)}>{y}년</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
